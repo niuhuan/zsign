@@ -5,3 +5,5 @@ zsign
 .zsign*
 .xmake
 build
+.idea/
+.vscode/
