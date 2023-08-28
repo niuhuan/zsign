@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.14)
-SET(CMAKE_TOOLCHAIN_FILE "${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake")
 
 project(zsign)
 set(CMAKE_CXX_STANDARD 11)
@@ -17,16 +16,14 @@ include_directories(${ZLIB_INCLUDE_DIR})
 list(APPEND LIB_LIST ${ZLIB_LIBRARIES})
 
 find_package(libzip REQUIRED)
+list(APPEND LIB_LIST "libzip::zip")
 
 # Main sources
 
 file(GLOB SRC common/*.cpp ./**.cpp)
 
 add_executable(zsign ${SRC})
-target_link_libraries(zsign ${LIB_LIST} libzip::zip)
-
-#find_package(libzip CONFIG REQUIRED)
-#target_link_libraries(main PRIVATE libzip::zip)
+target_link_libraries(zsign ${LIB_LIST})
 
 #find_package(OpenSSL REQUIRED)
 #target_link_libraries(main PRIVATE OpenSSL::SSL OpenSSL::Crypto)
